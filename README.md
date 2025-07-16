@@ -11,6 +11,11 @@ Cómo iniciar el proyecto (modo DEBUG).
     cp .env.example .env
     ```
 
+1. Iniciar [Tailwind](https://tailwindcss.com/docs/installation/tailwind-cli)
+    ```sh
+    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/public/css/tailwind.css --minify
+    ```
+
 1. Iniciar servidor de desarrollo (**dentro de tu [`virtualenv`](#pip-y-virtualenv)**):
     ```sh
     python django-project/manage.py runserver
