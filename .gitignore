@@ -208,3 +208,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Node (npm / pnpm)
+node_modules/
+package-lock.json
+pnpm-lock.yaml
