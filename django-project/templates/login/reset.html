@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>login</title>
+    <link rel="stylesheet" href="register.html">
     <style>
         html, body {
             height: 100%;
@@ -21,18 +22,15 @@
 <body>
     <div class="background-container" style="background-image: url('/django-project/public/img/fondo_login.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center center;">
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-amber-50 rounded-lg p-8">
-            <h1 class="text-center pb-5 text-2xl font-bold text-gray-800">Inicio de sesión</h1>
+            <h1 class="text-center pb-5 text-2xl font-bold text-gray-800">Recupero Contraseña</h1>
+            <h5 class="text-center pb-5 text-xs font-bold text-gray-700">te vamos a enviar un codigo a tu correo</h5>
             <form method="post" class="px-10 py-0">
                 <div class="mb-4 relative"> <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1">Nombre de usuario</label>
+                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1">Mail</label>
                 </div>
-                <div class="mb-4 relative">
-                    <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1">Contraseña</label>
-                </div>
-                <div class="text-right text-blue-600 hover:underline mb-6 text-sm"> <a href="reset.html">¿Olvidó su contraseña?</a></div>
-                <input type="submit" value="Iniciar Sesión" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 cursor-pointer text-lg font-semibold">
-                <div class="mt-4 text-center text-gray-700">Quiero <a href="register.html" class="text-blue-600 hover:underline">registrarme</a></div>
+                    <a href="validator.html">
+                        <input type="submit" value="enviar codigo" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 cursor-pointer text-lg font-semibold">
+                    </a>
             </form>
         </div>
     </div>

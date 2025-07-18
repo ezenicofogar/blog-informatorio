@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>register</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .background-container {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container" style="background-image: url('/django-project/public/img/fondo_login.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-amber-50 rounded-lg p-8">
+            <h1 class="text-center pb-5 text-2xl font-bold text-gray-800">Registrarse</h1>
+            <form method="post" class="px-10 py-0">
+                <div class="mb-4 relative"> <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1">Nombre de usuario</label>
+                </div>
+                <div class="mb-4 relative">
+                    <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1">Mail</label>
+                </div>
+                <div class="mb-4 relative">
+                    <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1">Contraseña</label>
+                </div>
+                <div class="mb-4 relative">
+                    <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1"> Repetir Contraseña</label>
+                </div>
+                <input type="submit" value="registrarme" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 cursor-pointer text-lg font-semibold">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
