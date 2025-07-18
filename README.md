@@ -2,16 +2,17 @@
 
 ## Cómo iniciar el proyecto
 
-### Comandos generales :pushpin:
+### Comandos generales
 
 Cómo iniciar el proyecto (modo DEBUG).
 
-1. Copiar `.env.example` a `.env`:
+1. Copiar archivo `.env.example` a `.env`:
     ```sh
     cp .env.example .env
     ```
 
-1. Iniciar [Tailwind](https://tailwindcss.com/docs/installation/tailwind-cli)
+1. Compilar **`Tailwind`** (opcional, requiere [TailwindCLI](#instalar-tailwind)):
+
     ```sh
     npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/public/css/tailwind.css --minify
     ```
@@ -21,9 +22,11 @@ Cómo iniciar el proyecto (modo DEBUG).
     python django-project/manage.py runserver
     ```
 
-### `Pip` y `Virtualenv` :memo:
+---
 
-Cómo crear el entorno virtual e instalar las dependencias.
+### `Pip` y `Virtualenv`
+
+Cómo crear el entorno virtual e instalar las dependencias del proyecto.
 
 1. Crear `venv`:
     ```sh
@@ -45,7 +48,9 @@ Cómo crear el entorno virtual e instalar las dependencias.
     pip install -r requirements.txt
     ```
 
-### Usar `pipenv` (alternativa a `venv`) :coffee:
+### Usar `pipenv` (alternativa a `pip` y `venv`)
+
+Cómo instalar [`pipenv`](https://pipenv-es.readthedocs.io/es/latest/) e instalar las dependencias del proyecto.
 
 1. Instalar `pipenv`:
     ```sh
@@ -60,4 +65,20 @@ Cómo crear el entorno virtual e instalar las dependencias.
 1. Activar el entorno virtual:
     ```sh
     pipenv shell
+    ```
+
+### Instalar `tailwind`
+
+Cómo instalar la herramienta [TailwindCLI](https://tailwindcss.com/docs/installation/tailwind-cli)
+
+1. Instalar [Node.js](https://nodejs.org/es) si no lo tienes instalado.
+
+1. Instalar dependencias de [`package.json`](/package.json) usando Node Package Manager:
+    ```sh
+    npm install
+    ```
+
+1. Ejecutar TailwindCLI:
+    ```sh
+    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/public/css/tailwind.css --minify
     ```
