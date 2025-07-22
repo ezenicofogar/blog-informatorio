@@ -1,0 +1,4 @@
+@import "tailwindcss" source(none);
+
+@source "django-project/apps";
+@source "django-project/templates";
