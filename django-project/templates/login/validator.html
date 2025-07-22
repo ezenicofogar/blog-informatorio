@@ -1,26 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>login</title>
-    <link rel="stylesheet" href="register.html">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        .background-container {
-            height: 100%;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-    <div class="background-container" style="background-image: url('/django-project/public/img/fondo_login.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+{% extends 'layout/html5.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .background-container {
+        height: 100%;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="background-container" style="background-image: url('{% static 'img/fondo_login.jpg' %}'); background-size: cover; background-repeat: no-repeat; background-position: center center;">
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-amber-50 rounded-lg p-8">
             <h1 class="text-center pb-5 text-2xl font-bold text-gray-800">Recupero Contraseña</h1>
             <h5 class="text-center pb-5 text-xs font-bold text-gray-700">Ingresa el codigo recibido</h5>
@@ -32,5 +29,4 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

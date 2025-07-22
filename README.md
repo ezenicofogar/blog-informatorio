@@ -82,5 +82,5 @@ Cómo instalar la herramienta [TailwindCLI](https://tailwindcss.com/docs/install
 
 1. Ejecutar TailwindCLI:
     ```sh
-    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/public/css/tailwind.css --minify
+    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/static/css/tailwind.css --minify
     ```
