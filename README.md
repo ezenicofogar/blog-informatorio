@@ -2,6 +2,8 @@
 
 ## Cómo iniciar el proyecto
 
+> Nota: todos los comandos mostrados en esta sección están escritos para ejecutarse sin cambiar de carpeta.
+
 ### Comandos generales
 
 Cómo iniciar el proyecto (modo DEBUG).
