@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 # Create your views here.
+
+class PostDetailView(TemplateView):
+    template_name = 'post/post_detail.html' # no está definido ese archivo?
+
+    #def get_context_data(self, **kwargs):
+        #context = super().get_context_data(**kwargs)
+        #post_slug = self.kwargs.get('slug')
+        #post = Post.objects.get(slug=post_slug) #no está definido esa función? 
+        #context['post'] = post
+        #return context
+
+
