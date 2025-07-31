@@ -1,0 +1,31 @@
+{% extends 'layout/page.html' %}
+
+    {% comment %}
+    
+    Este template solo muestra un mensaje. Lo utilizan:
+    - PasswordChangeDoneView
+    - PasswordResetDoneView
+    - PasswordResetCompleteView
+    Este template debería tener los mismos estilos (o similares) que authForm.html
+    
+    {% endcomment %}
+
+{% block content %}
+
+    <div>
+        <h1>{{ html_title }}</h1>
+    </div>
+
+    <div>
+        <p>{{ done_text }}</p>
+    </div>
+
+    {% if links %}
+    <ul>
+        {% for link in links %}
+        <li><a href="{% url link.url %}">{{ link.text }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+{% endblock %}

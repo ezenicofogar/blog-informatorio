@@ -1,0 +1,38 @@
+{% extends 'layout/page.html' %}
+
+    {% comment %}
+    
+    Este template es el formulario utilizado por las vistas de autenticación:
+    - CreationView
+    - LoginView
+    - PasswordChangeView
+    - PasswordResetView
+    - PasswordResetConfirmView
+    
+    {% endcomment %}
+
+{% block content %}
+
+    <form action="." method="post" class="auth-form">
+        {% csrf_token %}
+
+        <div>
+            <h1>{{ html_title }}</h1>
+        </div>
+
+        {{ form }}
+
+        <div>
+            <input type="submit" value="{{ form_action }}">
+        </div>
+
+        {% if links %}
+        <ul>
+            {% for link in links %}
+            <li><a href="{% url link.url %}">{{ link.text }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </form>
+
+{% endblock %}

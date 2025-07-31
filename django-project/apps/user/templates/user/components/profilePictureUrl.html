@@ -1,0 +1,1 @@
+{% load static %}{% comment %}Este componente crea la URL para una imágen del usuario, o una por defecto.{% endcomment %}{% if user.profile.picture %}{{ user.profile.picture.url }}{% else %}{% static 'img/profile_default.png' %}{% endif %}

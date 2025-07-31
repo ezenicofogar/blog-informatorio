@@ -1,0 +1,19 @@
+{% extends 'layout/html5.html' %}
+
+    {% comment %}
+
+    Este template contiene la estructura de una página simple.
+    La mayoría de páginas heredan de este template.
+    Contiene el encabezado (header), el contenido principal (content),
+    y el pie de página (footer).
+
+    {% endcomment %}
+
+{% block body %}
+    {% include 'components/header.html' %}
+    
+    {% block content %}
+    {% endblock %}
+    
+    {% include 'components/footer.html' %}
+{% endblock %}

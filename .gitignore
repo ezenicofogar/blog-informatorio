@@ -213,3 +213,6 @@ __marimo__/
 node_modules/
 package-lock.json
 pnpm-lock.yaml
+
+# Development media
+django-project/.media/

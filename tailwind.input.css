@@ -1,4 +1,26 @@
 @import "tailwindcss" source(none);
 
-@source "django-project/apps";
-@source "django-project/templates";
+@source "django-project/**";
+
+@layer components {
+    
+    /* 
+    *   auth-form
+    *   Los estilos para los formularios de autenticación se definen aquí.
+    */
+
+    .auth-form > div {
+        @apply py-4;
+    }
+
+    .auth-form input[type="text"],
+    .auth-form input[type="email"],
+    .auth-form input[type="password"] {
+        @apply border border-neutral-800;
+    }
+
+    .auth-form input[type="submit"] {
+        @apply bg-blue-700 text-white;
+    }
+
+}
