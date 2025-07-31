@@ -10,11 +10,11 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 # Create your models here.
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True, validators=[MinLengthValidator(3), MaxLengthValidator(50)])
+    title = models.CharField(max_length=50, unique=True, validators=[MinLengthValidator(3), MaxLengthValidator(50)])
     slug = models.SlugField(unique=True, max_length=100, blank=True, null=True)
     
     class Meta:
-        ordering = ['name']
+        ordering = ['title']
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
@@ -24,11 +24,11 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return self.title
     
 #TODO: NO ESTÁ DEFINIDO AUTH_USER_MODEL, DEBE SER CONFIGURADO EN settings.py??
 class Post(models.Model):
