@@ -42,7 +42,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='posts')
     allow_comments = models.BooleanField(default=True)
     #image = models.ImageField(upload_to='post_images/', blank=True, null=True)
-    tags = models.CharField(max_length=200, blank=True, null=True, help_text="Comma-separated list of tags")
+    #tags = models.CharField(max_length=200, blank=True, null=True, help_text="Comma-separated list of tags")
     is_published = models.BooleanField(default=True)
     #class Meta:
         #ordering = ['-created_at']
