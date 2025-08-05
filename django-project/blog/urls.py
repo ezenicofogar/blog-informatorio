@@ -23,7 +23,7 @@ from apps.post.views import IndexView, PostDetailView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='home'),
-    path('post/<slug:slug>/', PostDetailView.as_view(), name='post_detail'),
+    #path('post/<slug:slug>/', PostDetailView.as_view(), name='post_detail'),  #Ya esta en apps/post/urls.py
 ]
 
 if settings.DEBUG:
