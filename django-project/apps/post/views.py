@@ -1,14 +1,30 @@
-from django.views.generic import TemplateView
-
-#from post.models import Post
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from post.models import Post
 
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'html5.html'
 
-class PostDetailView(TemplateView):
+class PostListView(ListView):
+    model = Post
+    template_name = 'post/post_list.html'
+    context_object_name = "posts_list"
+
+class PostDetailView(DetailView):
     #model = Post
-    template_name = 'post/post_detail.html' # no está definido ese archivo?
+    template_name = 'post/post_detail.html'
+
+class PostCreateView(CreateView):
+    #model = Post
+    template_name = 'post/post_form.html'
+
+class PostUpdateView(UpdateView):
+    #model = Post
+    template_name = 'post/post_update.html'
+
+class PostDeleteView(DeleteView):
+    #model = Post
+    template_name = 'post/post_confirm_delete.html'
 
     #def get_context_data(self, **kwargs):
         #context = super().get_context_data(**kwargs)
