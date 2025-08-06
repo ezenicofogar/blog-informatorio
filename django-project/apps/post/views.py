@@ -1,9 +1,10 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from post.models import Post
+from apps.post.models import Post
 
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'html5.html'
+
 
 class PostListView(ListView):
     model = Post
