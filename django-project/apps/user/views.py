@@ -1,8 +1,10 @@
-from django.views import generic
-from django.contrib.auth import mixins
-from django.contrib.auth import views as auth_views
+from django.views import generic, View
+from django.contrib.auth import mixins, get_user_model, views as auth_views
 from django.urls import reverse_lazy
 from . import forms
+from .models import Profile as ProfileModel
+
+UserModel = get_user_model()
 
 
 # Registro de usuario
@@ -23,13 +25,71 @@ class CreationView(generic.CreateView):
 
 # Perfil del usuario (mi perfil)
 
-class ProfileSelfView(mixins.LoginRequiredMixin, generic.TemplateView):
-    template_name = 'user/profileSelf.html'
+class SelfDetailView(mixins.LoginRequiredMixin, generic.TemplateView):
+    template_name = 'user/selfDetail.html'
     extra_context = {
         'html_title': 'Mi perfil',
         'links': [
             { 'text': 'Cambiar mi contraseña', 'url': 'user:password_change' },
         ],
+    }
+
+class SelfUpdateView(mixins.LoginRequiredMixin, generic.UpdateView):
+    template_name = 'user/selfUpdate.html'
+    model = UserModel
+    fields = ['first_name', 'last_name', 'email']
+    def get_object(self, queryset=None):
+        return self.request.user
+    def get_success_url(self):
+        return reverse_lazy('user:self_detail')
+    extra_context = {
+        'html_title': 'Editar mi perfil'
+    }
+
+class SelfUpdateProfileView(mixins.LoginRequiredMixin, generic.UpdateView):
+    template_name = 'user/selfUpdateProfile.html'
+    model = ProfileModel
+    fields = ['bio', 'picture']
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+    def get_success_url(self):
+        return reverse_lazy('user:self_detail')
+    extra_context = {
+        'html_title': 'Editar mi biografía'
+    }
+
+
+# Perfil del usuario (general)
+
+class UserDetailView(mixins.LoginRequiredMixin, generic.DetailView):
+    template_name = 'user/userDetail.html'
+    queryset = UserModel.objects.all()
+    extra_context = {
+        'html_title': 'Perfil de usuario'
+    }
+
+class UserUpdateView(mixins.PermissionRequiredMixin, generic.UpdateView):
+    template_name = 'user/userUpdate.html'
+    permission_required = ['auth.change_user',]
+    model = UserModel
+    fields = ['first_name', 'last_name', 'email', 'is_active']
+    def get_success_url(self):
+        pk = self.get_object().pk
+        return reverse_lazy('user:user_detail', kwargs={'pk': pk})
+    extra_context = {
+        'html_title': 'Editar perfil de usuario'
+    }
+
+class UserUpdateProfileView(mixins.PermissionRequiredMixin, generic.UpdateView):
+    template_name = 'user/userUpdateProfile.html'
+    permission_required = ['auth.change_user',]
+    model = ProfileModel
+    fields = ['bio', 'picture']
+    def get_success_url(self):
+        pk = self.get_object().pk
+        return reverse_lazy('user:user_detail', kwargs={'pk': pk})
+    extra_context = {
+        'html_title': 'Editar perfil de usuario'
     }
 
 
@@ -57,7 +117,7 @@ class PasswordChangeView(auth_views.PasswordChangeView):
         'html_title': 'Cambiar contraseña',
         'form_action': 'Cambiar',
         'links': [
-            { 'text': 'Ir a mi perfil', 'url': 'user:profile_self' },
+            { 'text': 'Ir a mi perfil', 'url': 'user:self_detail' },
         ],
     }
 
@@ -67,7 +127,7 @@ class PasswordChangeDoneView(auth_views.PasswordChangeDoneView):
         'html_title': 'Contraseña cambiada',
         'done_text': 'Tu contraseña ha sido cambiada con éxito.',
         'links': [
-            { 'text': 'Ir a mi perfil', 'url': 'user:profile_self' },
+            { 'text': 'Ir a mi perfil', 'url': 'user:self_detail' },
         ],
     }
 

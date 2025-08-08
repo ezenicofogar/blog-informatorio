@@ -13,8 +13,15 @@ urlpatterns = [
     # Registro de usuario
     path('register/', views.CreationView.as_view(), name='register'),
 
-    # Perfil del usuario
-    path('', views.ProfileSelfView.as_view(), name='profile_self'),
+    # Self
+    path('', views.SelfDetailView.as_view(), name='self_detail'),
+    path('edit/', views.SelfUpdateView.as_view(), name='self_update'),
+    path('edit/bio/', views.SelfUpdateProfileView.as_view(), name='self_update_profile'),
+
+    # User
+    path('<int:pk>/', views.UserDetailView.as_view(), name='user_detail'),
+    path('<int:pk>/edit/', views.UserUpdateView.as_view(), name='user_update'),
+    path('<int:pk>/edit/bio/', views.UserUpdateProfileView.as_view(), name='user_update_profile'),
 
     # Auth views de Django
     # 

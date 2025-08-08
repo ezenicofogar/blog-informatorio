@@ -18,12 +18,14 @@
     </form>
     <div>
         <h2 class="text-xl">Información personal</h2>
+        <a href="{% url 'user:self_update'%}">editar</a>
         <p>E-mail: {{ request.user.email }}</p>
         <p>Nombre: {{ request.user.first_name }}</p>
         <p>Apellido: {{ request.user.last_name }}</p>
     </div>
     <div>
         <h2 class="text-xl">Información adicional</h2>
+        <a href="{% url 'user:self_update_profile'%}">editar</a>
         <p>Biografía: {{ request.user.profile.bio }}</p>
         <p>Imágen de perfil:</p>
         <img src="{% include 'user/components/profilePictureUrl.html' with user=request.user %}"

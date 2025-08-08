@@ -91,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # TODO: Cambiar por la página principal de la aplicación de posts
-LOGIN_REDIRECT_URL = 'user:profile_self'
+LOGIN_REDIRECT_URL = 'user:self_detail'
 
 LOGIN_URL = 'user:login'
 
