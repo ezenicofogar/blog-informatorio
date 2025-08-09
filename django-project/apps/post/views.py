@@ -1,8 +1,10 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from apps.post.models import Post
+from apps.post.models import Post, PostImage, Comment
 from django.db.models import Count
-from apps.post.forms import PostFilterForm
-
+from apps.post.forms import PostFilterForm, PostCreateForm, CommentForm
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.conf import settings
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -62,8 +64,28 @@ class PostDetailView(DetailView):
     template_name = 'post/post_detail.html'
 
 class PostCreateView(CreateView):
-    #model = Post
-    template_name = 'post/post_form.html'
+    model = Post
+    form_class = PostCreateForm
+    template_name = 'post/post_create.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user  #no está definido el author?
+        post = form.save()
+
+        images = self.request.FILES.getlist('images')
+
+        if images:
+            for image in images:
+                PostImage.objects.create(post=post, image=image)
+        else:
+            PostImage.objects.create(
+                post=post, image=settings.DEFAULT_POST_IMAGE)
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('post:post_detail', kwargs={'slug': self.object.slug})
+
 
 class PostUpdateView(UpdateView):
     #model = Post
@@ -79,5 +101,32 @@ class PostDeleteView(DeleteView):
         #post = Post.objects.get(slug=post_slug) #no está definido esa función? 
         #context['post'] = post
         #return context
+
+class CommentCreateView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'post/post_detail.html',
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = Post.objects.get(slug=self.kwargs['slug'])
+
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
+    
+
+class CommentUpdateView(UpdateView):
+    #model = Comment
+    #template_name = 'post/post_detail.html',
+    pass
+
+class CommentDeleteView(DeleteView):
+    #model = Comment
+    #template_name = 'post/post_detail.html',
+    pass
+
+
 
 
