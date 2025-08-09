@@ -4,9 +4,10 @@ import os
 from django.conf import settings
 from django.utils import timezone
 from django.utils.text import slugify
-#from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model   
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
+UserModel = get_user_model()
 # Create your models here.
 
 class Category(models.Model):
@@ -38,7 +39,7 @@ class Post(models.Model):
     content = models.TextField(max_length=10000, validators=[MinLengthValidator(10)])
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='posts')
     allow_comments = models.BooleanField(default=True)
     #image = models.ImageField(upload_to='post_images/', blank=True, null=True)
@@ -91,7 +92,7 @@ class Post(models.Model):
 class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     content = models.TextField(max_length=300, validators=[MinLengthValidator(1), MaxLengthValidator(300)])
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
