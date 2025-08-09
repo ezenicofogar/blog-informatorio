@@ -31,7 +31,7 @@ class Category(models.Model):
     def __str__(self):
         return self.title
     
-#TODO: NO ESTÁ DEFINIDO AUTH_USER_MODEL, DEBE SER CONFIGURADO EN settings.py??
+
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100, validators=[MinLengthValidator(5), MaxLengthValidator(100)])
@@ -45,10 +45,10 @@ class Post(models.Model):
     #image = models.ImageField(upload_to='post_images/', blank=True, null=True)
     #tags = models.CharField(max_length=200, blank=True, null=True, help_text="Comma-separated list of tags")
     is_published = models.BooleanField(default=True)
-    #class Meta:
-        #ordering = ['-created_at']
-        #verbose_name = 'Post'
-        #verbose_name_plural = 'Posts'
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
     
     #def get_absolute_url(self):
         #from django.urls import reverse
@@ -97,10 +97,10 @@ class Comment(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
-    #class Meta:
-        #ordering = ['created_at']
-        #verbose_name = 'Comment'
-        #verbose_name_plural = 'Comments'
+    class Meta:
+        ordering = ['created_at']
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
 
     def __str__(self):
         return f'Comentario de: {self.author} en {self.post} : {self.content[:50]}...'
@@ -125,10 +125,9 @@ class PostImage(models.Model):
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
 
-
-    #class Meta:
-        #verbose_name = 'Post Image'
-        #verbose_name_plural = 'Post Images'
+    class Meta:
+        verbose_name = 'Post Image'
+        verbose_name_plural = 'Post Images'
 
     def __str__(self):
         return f'Imagen de {self.post.title} - {self.caption[:20] if self.caption else "Sin título"}'
