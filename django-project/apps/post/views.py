@@ -60,8 +60,45 @@ class PostListView(ListView):
 
 
 class PostDetailView(DetailView):
-    #model = Post
+    model = Post
     template_name = 'post/post_detail.html'
+    context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_images = self.object.images.filter(active=True)
+
+        context['active_images'] = active_images
+        context['add_comment_form'] = CommentForm()
+
+        edit_comment_id = self.request.GET.get('edit_comment')
+        if edit_comment_id:
+            comment = get_object_or_404(Comment, id=edit_comment_id)
+
+            if comment.author == self.request.user:
+                context['edit_comment_id'] = comment.id
+                context['edit_comment_form'] = CommentForm(instance=comment)
+            else:
+                context['edit_comment_id'] = None
+                context['edit_comment_form'] = None
+
+        delete_comment_id = self.request.GET.get('delete_comment')
+        if delete_comment_id:
+            comment = get_object_or_404(Comment, id=delete_comment_id)
+
+            if (comment.author == self.request.user or
+                    (comment.post.author == self.request.user and not
+                     comment.author.is_admin and not
+                     comment.author.is_superuser) or
+                    self.request.user.is_superuser or
+                    self.request.user.is_staff or
+                    self.request.user.is_admin
+                ):
+                context['deleting_comment_id'] = comment.id
+            else:
+                context['deleting_comment_id'] = None        
+
+        return context
 
 class PostCreateView(CreateView):
     model = Post
@@ -69,7 +106,7 @@ class PostCreateView(CreateView):
     template_name = 'post/post_create.html'
 
     def form_valid(self, form):
-        form.instance.author = self.request.user  #no está definido el author?
+        form.instance.author = self.request.user  
         post = form.save()
 
         images = self.request.FILES.getlist('images')
