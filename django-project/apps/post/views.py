@@ -124,8 +124,10 @@ class PostCreateView(CreateView):
 
 
 class PostUpdateView(UpdateView):
-    #model = Post
+    model = Post
     template_name = 'post/post_update.html'
+    fields = ['title', 'content']
+    success_url = reverse_lazy('post:post_detail', kwargs={'slug': self.object.slug})   
 
 class PostDeleteView(DeleteView):
     model = Post
@@ -135,7 +137,7 @@ class PostDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post_slug = self.kwargs.get('slug')
-        post = Post.objects.get(slug=post_slug) #no está definido esa función? 
+        post = Post.objects.get(slug=post_slug)
         context['post'] = post
         return context
 
@@ -155,15 +157,16 @@ class CommentCreateView(CreateView):
     
 
 class CommentUpdateView(UpdateView):
-    #model = Comment
-    #template_name = 'post/post_detail.html',
-    pass
-
+    model = Comment
+    fields = ['text']
+    template_name = 'comments/comment_update.html'
+    def get_success_url(self):
+        return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
+    
 class CommentDeleteView(DeleteView):
-    #model = Comment
-    #template_name = 'post/post_detail.html',
-    pass
-
-
-
-
+    model = Comment
+    template_name = 'comments/comment_delete.html'
+    success_url = reverse_lazy('comment_list')
+    def get_queryset(self):
+        # Sobrescribir este método para restringir qué comentarios un usuario puede eliminar.
+        return Comment.objects.filter(author=self.request.user)
