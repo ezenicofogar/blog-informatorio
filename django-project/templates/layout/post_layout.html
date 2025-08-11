@@ -12,13 +12,13 @@
 {% endblock extra_head_layout %}
 
 {% block content_layout %}
-  {% include 'components/commons/header.html' %}
+  {% include 'components/header.html' %}
   <!--NO ESTA DEFINIDO EL HEADER, YO NO LO TENGO DEFINIDO. ¡¡VER LA RAMA LOGIN DE EZE!!-->
   <main class="min-h-[calc(100dvh_-_112px)] flex justify-center">
     <div class="container mx-4 md:mx-8 lg:mx-40 bg-pink-100">
       {% block content %} ⚠️ Manejar contenido del post {% endblock content %}
     </div>
   </main>
-  {% include 'components/commons/footer.html' %} 
+  {% include 'components/footer.html' %} 
   <!--NO ESTA DEFINIDO EL FOOTER, YO NO LO TENGO DEFINIDO. ¡¡VER LA RAMA LOGIN DE EZE!!-->
 {% endblock content_layout %}
