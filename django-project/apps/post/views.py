@@ -127,7 +127,9 @@ class PostUpdateView(UpdateView):
     model = Post
     template_name = 'post/post_update.html'
     fields = ['title', 'content']
-    success_url = reverse_lazy('post:post_detail', kwargs={'slug': self.object.slug})   
+    def get_success_url(self):
+        return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
+     
 
 class PostDeleteView(DeleteView):
     model = Post
