@@ -134,7 +134,8 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'post/post_confirm_delete.html'
-    success_url = reverse_lazy('post:post_list')
+    def get_success_url(self):
+        return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -168,7 +169,9 @@ class CommentUpdateView(UpdateView):
 class CommentDeleteView(DeleteView):
     model = Comment
     template_name = 'comments/comment_delete.html'
-    success_url = reverse_lazy('comment_list')
+    def get_success_url(self):
+        return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
+    
     def get_queryset(self):
         # Sobrescribir este método para restringir qué comentarios un usuario puede eliminar.
         return Comment.objects.filter(author=self.request.user)
