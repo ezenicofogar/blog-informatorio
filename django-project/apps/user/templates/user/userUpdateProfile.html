@@ -1,4 +1,4 @@
-{% extends 'layout/page.html' %}
+{% extends 'layout/packed.html' %}
 
     {% comment %}
     
@@ -6,29 +6,36 @@
     
     {% endcomment %}
 
-{% block content %}
-
+{% block packed %}
     <div>
-        <h1 class="text-2xl">Editando {{ object.user.username }}</h1>
+        <h1 class="text-4xl text-center">{{ object.user.username }}</h1>
+        <p class="text-xl text-center">Editando información adicional</p>
     </div>
+    
     {% if not object.user.is_active %}
     <div>
         <p>Usuario Inactivo</p>
     </div>
     {% endif %}
     
-    <form action="." method="post" enctype="multipart/form-data">
+    <form action="." method="post" class="auth-form" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Guardar">
     </form>
 
-    {% if links %}
-    <ul>
+    <ul class="py-4">
+        {% if request.user.pk == object.pk %}
+        <a class="hover:opacity-70 text-link transition-opacity" href="{% url 'user:self_detail' %}">Volver a mi perfil</a>
+        {% elif perms.auth.change_user %}
+        <a class="hover:opacity-70 text-link transition-opacity" href="{% url 'user:user_detail' object.pk %}">Volver al perfil</a>
+        {% endif %}
+
+        {% if links %}
         {% for link in links %}
-        <li><a href="{% url link.url %}">{{ link.text }}</a></li>
+        <li><a class="hover:opacity-70 text-link transition-opacity" href="{% url link.url %}">{{ link.text }}</a></li>
         {% endfor %}
+        {% endif %}
     </ul>
-    {% endif %}
 
 {% endblock %}

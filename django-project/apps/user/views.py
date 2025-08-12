@@ -25,17 +25,13 @@ class CreationView(generic.CreateView):
 
 # Perfil del usuario (mi perfil)
 
-class SelfDetailView(mixins.LoginRequiredMixin, generic.TemplateView):
-    template_name = 'user/selfDetail.html'
-    extra_context = {
-        'html_title': 'Mi perfil',
-        'links': [
-            { 'text': 'Cambiar mi contraseña', 'url': 'user:password_change' },
-        ],
-    }
+class SelfDetailView(mixins.LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        from django.shortcuts import redirect
+        return redirect('user:user_detail', request.user.pk)
 
 class SelfUpdateView(mixins.LoginRequiredMixin, generic.UpdateView):
-    template_name = 'user/selfUpdate.html'
+    template_name = 'user/userUpdate.html'
     model = UserModel
     fields = ['first_name', 'last_name', 'email']
     def get_object(self, queryset=None):
@@ -43,11 +39,11 @@ class SelfUpdateView(mixins.LoginRequiredMixin, generic.UpdateView):
     def get_success_url(self):
         return reverse_lazy('user:self_detail')
     extra_context = {
-        'html_title': 'Editar mi perfil'
+        'html_title': 'Editar mi perfil',
     }
 
 class SelfUpdateProfileView(mixins.LoginRequiredMixin, generic.UpdateView):
-    template_name = 'user/selfUpdateProfile.html'
+    template_name = 'user/userUpdateProfile.html'
     model = ProfileModel
     fields = ['bio', 'picture']
     def get_object(self, queryset=None):
