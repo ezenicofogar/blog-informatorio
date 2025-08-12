@@ -172,6 +172,6 @@ class CommentDeleteView(DeleteView):
     def get_success_url(self):
         return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
     
-    def get_queryset(self):
-        # Sobrescribir este método para restringir qué comentarios un usuario puede eliminar.
-        return Comment.objects.filter(author=self.request.user)
+    #def get_queryset(self):
+            #Sobrescribir este método para restringir qué comentarios un usuario puede eliminar.
+        #return Comment.objects.filter(author=self.request.user)
