@@ -8,7 +8,7 @@ from django.conf import settings
 
 # Create your views here.
 class IndexView(TemplateView):
-    template_name = 'html5.html'
+    template_name = 'layout/html5.html'
 
 
 class PostListView(ListView):
