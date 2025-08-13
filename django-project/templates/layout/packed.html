@@ -1,0 +1,14 @@
+{% extends 'layout/page.html' %}
+
+{% block content %}
+
+<section id="focus-section" class="py-8 px-1">
+    <div class="w-full mx-auto p-4 md:p-8 max-w-xl rounded-xl dark:bg-base-800
+    shadow-lg shadow-base-700/40 dark:shadow-none
+    border border-base-950/20 dark:border-base-50/20">
+        {% block packed %}
+        {% endblock %}
+    </div>
+</section>
+
+{% endblock %}

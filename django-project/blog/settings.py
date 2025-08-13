@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'apps.user',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +90,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# TODO: Cambiar por la página principal de la aplicación de posts
+LOGIN_REDIRECT_URL = 'user:self_detail'
+
+LOGIN_URL = 'user:login'
+
+# TODO: Cambiar por landing page
+LOGOUT_REDIRECT_URL = 'user:login'
+
 
 # Internacionalización
 # https://docs.djangoproject.com/es/5.2/topics/i18n/
@@ -105,7 +115,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/es/5.2/howto/static-files/
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'public',
+    BASE_DIR / 'static',
 ]
 
 
@@ -117,6 +127,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Cargar configuraciones específicas
 if DEBUG:
-    from .settings_debug import SECRET_KEY, ALLOWED_HOSTS, DATABASES, STATIC_URL, STATIC_ROOT
+    from .settings_debug import SECRET_KEY, ALLOWED_HOSTS, DATABASES, STATIC_URL, STATIC_ROOT, MEDIA_URL, MEDIA_ROOT
 else:
-    from .settings_production import SECRET_KEY, ALLOWED_HOSTS, DATABASES, STATIC_URL, STATIC_ROOT
+    from .settings_production import SECRET_KEY, ALLOWED_HOSTS, DATABASES, STATIC_URL, STATIC_ROOT, MEDIA_URL, MEDIA_ROOT

@@ -2,6 +2,8 @@
 
 ## Cómo iniciar el proyecto
 
+> Nota: todos los comandos mostrados en esta sección están escritos para ejecutarse sin cambiar de carpeta.
+
 ### Comandos generales
 
 Cómo iniciar el proyecto (modo DEBUG).
@@ -14,7 +16,7 @@ Cómo iniciar el proyecto (modo DEBUG).
 1. Compilar **`Tailwind`** (opcional, requiere [TailwindCLI](#instalar-tailwind)):
 
     ```sh
-    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/public/css/tailwind.css --minify
+    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/static/css/tailwind.css --minify
     ```
 
 1. Iniciar servidor de desarrollo (**dentro de tu [`virtualenv`](#pip-y-virtualenv)**):
@@ -80,5 +82,5 @@ Cómo instalar la herramienta [TailwindCLI](https://tailwindcss.com/docs/install
 
 1. Ejecutar TailwindCLI:
     ```sh
-    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/public/css/tailwind.css --minify
+    npx @tailwindcss/cli -i ./tailwind.input.css -o ./django-project/static/css/tailwind.css --minify
     ```

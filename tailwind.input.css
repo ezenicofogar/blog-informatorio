@@ -1,4 +1,81 @@
 @import "tailwindcss" source(none);
 
-@source "django-project/apps";
-@source "django-project/templates";
+@source "django-project/**";
+@source "tailwind.input.css";
+
+@theme {
+    --color-base-50: var(--color-neutral-50);
+    --color-base-100: var(--color-neutral-100);
+    --color-base-200: var(--color-neutral-200);
+    --color-base-300: var(--color-neutral-300);
+    --color-base-400: var(--color-neutral-400);
+    --color-base-500: var(--color-neutral-500);
+    --color-base-600: var(--color-neutral-600);
+    --color-base-700: var(--color-neutral-700);
+    --color-base-800: var(--color-neutral-800);
+    --color-base-900: var(--color-neutral-900);
+    --color-base-950: var(--color-neutral-950);
+
+    --color-primary-500: var(--color-sky-500);
+    --color-primary-700: var(--color-sky-700);
+}
+
+@layer components {
+
+    /* 
+    *   auth-form
+    *   Los estilos para los formularios de autenticación se definen aquí.
+    */
+
+    .auth-form > div {
+        @apply py-2 text-lg;
+    }
+
+    .auth-form input[type="text"],
+    .auth-form input[type="email"],
+    .auth-form input[type="password"] {
+        @apply px-3 py-1 my-1 flex w-full border border-base-800/20 dark:border-base-50/50
+        focus:outline-2 outline-primary-500 focus:border-transparent
+        shadow-md dark:shadow-none rounded;
+    }
+
+    .auth-form textarea {
+        @apply w-full;
+    }
+
+    .auth-form label {
+        @apply block font-medium opacity-60;
+    }
+    
+    .auth-form input[type="submit"] {
+        @apply bg-primary-700 hover:bg-primary-500 text-base-50 transition-colors
+        rounded px-6 py-2 font-medium;
+    }
+
+    .auth-form input[type="checkbox"] {
+        @apply inline-block align-middle w-5 h-5;
+    }
+
+    .auth-form .helptext {
+        @apply opacity-70 text-sm;
+    }
+
+    .auth-form > div:has(input[type="file"]) a {
+        @apply block truncate underline cursor-pointer
+            hover:opacity-70 transition-opacity;
+    }
+
+    .auth-form  label[for="picture-clear_id"] {
+        @apply inline cursor-pointer select-none;
+    }
+    
+    /* 
+    *   utilidades
+    *   Algunos estilos útiles para el sitio web.
+    */
+
+    .text-link {
+        @apply underline cursor-pointer;
+    }
+
+}

@@ -1,0 +1,32 @@
+{% extends 'layout/html5.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .background-container {
+        height: 100%;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="background-container" style="background-image: url('{% static 'img/fondo_login.jpg' %}'); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-amber-50 rounded-lg p-8">
+            <h1 class="text-center pb-5 text-2xl font-bold text-gray-800">Recupero Contraseña</h1>
+            <h5 class="text-center pb-5 text-xs font-bold text-gray-700">Ingresa el codigo recibido</h5>
+            <form method="post" class="px-10 py-0">
+                <div class="mb-4 relative"> <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="absolute left-3 -top-2 text-sm text-gray-600 bg-amber-50 px-1">codigo</label>
+                </div>
+                <input type="submit" value="validar" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 cursor-pointer text-lg font-semibold">
+            </form>
+        </div>
+    </div>
+{% endblock %}
