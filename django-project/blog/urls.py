@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from apps.post.views import IndexView
 
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('', include('apps.post.urls')),
 
     
+    path('user/', include('apps.user.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,77 @@
+{% extends 'layout/packed.html' %}
+
+    {% comment %}
+    
+    
+    
+    {% endcomment %}
+
+{% block packed %}
+<div class="auth-form">
+    <div>
+        <h1 class="text-4xl text-center">{{ object.username }}</h1>
+    </div>
+    {% if not object.is_active %}
+    <div>
+        <p>Usuario Inactivo</p>
+    </div>
+    {% endif %}
+    {% if perms.auth.view_user or request.user.pk == object.pk %}
+    <div>
+        <p class="border-b border-base-500/30"></p>
+    </div>
+    <div>
+        <h2 class="text-xl">Información personal</h2>
+        {% if perms.auth.change_user %}
+        <a class="hover:opacity-70 cursor-pointer text-orange-500 transition-opacity" href="{% url 'user:user_update' object.pk %}">
+            <svg class="h-[1em] w-[1em] mr-1 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+            <span class="underline"> Editar (como administrador) </span>
+        </a>
+        {% elif request.user.pk == object.pk %}
+        <a class="hover:opacity-70 cursor-pointer transition-opacity" href="{% url 'user:self_update' %}">
+            <svg class="h-[1em] w-[1em] mr-1 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+            <span class="underline"> Editar </span>
+        </a>
+        {% endif %}
+        <p><span class="font-medium opacity-60">E-mail:</span> {{ object.email }}</p>
+        <p><span class="font-medium opacity-60">Nombre:</span> {{ object.first_name }}</p>
+        <p><span class="font-medium opacity-60">Apellido:</span> {{ object.last_name }}</p>
+    </div>
+    {% endif %}
+    <div>
+        <p class="border-b border-base-500/30"></p>
+    </div>
+    <div>
+        <h2 class="text-xl">Información adicional</h2>
+        {% if perms.auth.change_user %}
+        <a class="hover:opacity-70 cursor-pointer text-orange-500 transition-opacity" href="{% url 'user:user_update_profile' object.pk %}">
+            <svg class="h-[1em] w-[1em] mr-1 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+            <span class="underline"> Editar (como administrador) </span>
+        </a>
+        {% elif request.user.pk == object.pk %}
+        <a class="hover:opacity-70 cursor-pointer transition-opacity" href="{% url 'user:self_update_profile' %}">
+            <svg class="h-[1em] w-[1em] mr-1 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+            <span class="underline"> Editar </span>
+        </a>
+        {% endif %}
+        {% if object.profile.bio %}
+        <p><span class="font-medium opacity-60">Biografía:</span> {{ object.profile.bio }}</p>
+        {% endif %}
+        <div class="flex flex-col items-center py-4">
+            <img src="{% include 'user/components/profilePictureUrl.html' with user=object %}"
+            alt="" class="w-48 h-48 rounded-full object-contain">
+            <p>Imágen de perfil</p>
+        </div>
+    </div>
+    
+    <ul>
+        {% if request.user.pk == object.pk %}
+        <li><a class="hover:opacity-70 text-link transition-opacity" href="{% url 'user:password_change' %}">Cambiar mi contraseña</a></li>
+        {% endif %}
+        {% for link in links %}
+        <li><a class="hover:opacity-70 text-link transition-opacity" href="{% url link.url %}">{{ link.text }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

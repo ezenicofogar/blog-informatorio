@@ -1,0 +1,6 @@
+{% if user.is_authenticated %}
+<form action="{% url 'user:logout' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Cerrar Sesión">
+</form>
+{% endif %}

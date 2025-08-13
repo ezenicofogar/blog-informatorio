@@ -1,15 +1,24 @@
 {% load static %}
+
+    {% comment %}
+
+    Este template contiene la estructura básica de HTML.
+    Enlaza el archivo de estilos de TailwindCSS.
+
+    {% endcomment %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} BLOG DE JUEGOS </title>
+    <title>{{ html_title }}</title>
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    {% block extra_head %}
+    {% endblock %}
 </head>
-<body>
-    {% block content %}
-    Este blog se trata sobre juegos de consola y PC
+<body class="text-base-900 bg-base-50 dark:text-base-50 dark:bg-base-900">
+    {% block body %}
     {% endblock %}
 </body>
 </html>
