@@ -17,17 +17,15 @@ Incluyendo otra configuración de URL
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from apps.post.views import IndexView
-
-from django.conf import settings
+from apps.post import views as post_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', IndexView.as_view(), name='home'),
-    path('', include('apps.post.urls')),
-
-    
+    path('post/', include('apps.post.urls')),    
     path('user/', include('apps.user.urls')),
+
+    path('', post_views.PostListView.as_view(), name='index'),
+    path('about/', post_views.AboutUsView.as_view(), name='about_us'),
 ]
 
 if settings.DEBUG:

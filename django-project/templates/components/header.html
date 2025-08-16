@@ -1,6 +1,23 @@
-{% if user.is_authenticated %}
-<form action="{% url 'user:logout' %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Cerrar Sesión">
-</form>
-{% endif %}
+<header class="flex justify-between items-center min-h-24 px-4 md:px-8">
+    <h2>
+        <a href="{% url 'index' %}">BLOG</a>
+    </h2>
+    <nav>
+        <ul>
+            <li>
+
+            </li>
+        </ul>
+        <div>
+            <p>USER</p>
+            {% if user.is_authenticated %}
+            <form action="{% url 'user:logout' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Cerrar Sesión">
+            </form>
+            {% else %}
+            <a href="{% url 'user:login' %}">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>

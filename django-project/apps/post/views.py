@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth import mixins as auth_mixins
 from apps.post.models import Post, PostImage, Comment
 from django.db.models import Count
 from apps.post.forms import PostFilterForm, PostCreateForm, CommentForm
@@ -6,12 +7,11 @@ from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 
-# Create your views here.
-class IndexView(TemplateView):
-    template_name = 'layout/html5.html'
+# class IndexView(TemplateView):
+#     template_name = 'layout/html5.html'
 
 class AboutUsView(TemplateView):
-    template_name = 'layout/about_us.html'
+    template_name = 'about_us.html'
 
 
 class PostListView(ListView):
@@ -102,7 +102,8 @@ class PostDetailView(DetailView):
 
         return context
 
-class PostCreateView(CreateView):
+class PostCreateView(auth_mixins.PermissionRequiredMixin, CreateView):
+    permission_required = []
     model = Post
     form_class = PostCreateForm
     template_name = 'post/post_create.html'
