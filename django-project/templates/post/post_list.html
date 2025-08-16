@@ -21,7 +21,7 @@
   </form>
 
   <div class="grid grid-cols-1 gap-6">
-    {% for post in object_list %}
+    {% for post in posts %}
       <div class="bg-gray-800 text-white rounded-2xl p-6">
         <h3 class="text-2xl uppercase font-bold">{{ post.title }}</h3>
         <p>{{ post.content }}</p>
@@ -36,7 +36,7 @@
           >Ver el post...</a>
           <a 
             class="bg-red-500 text-white p-2 rounded-lg" 
-            href="{% url 'post:post_delete' slug=post.slug %}"
+            href="{% url 'post:post_confirm_delete' slug=post.slug %}"
           >Eliminar el post</a>
         </div>
       </div>
