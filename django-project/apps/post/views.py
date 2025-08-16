@@ -10,11 +10,14 @@ from django.conf import settings
 class IndexView(TemplateView):
     template_name = 'layout/html5.html'
 
+class AboutUsView(TemplateView):
+    template_name = 'layout/about_us.html'
+
 
 class PostListView(ListView):
     model = Post
     template_name = 'post/post_list.html'
-    context_object_name = "posts_list"
+    context_object_name = "posts"
 
     paginate_by = 1
 
@@ -133,7 +136,7 @@ class PostUpdateView(UpdateView):
 
 class PostDeleteView(DeleteView):
     model = Post
-    template_name = 'post/post_confirm_delete.html'
+    template_name = 'templates/post/post_confirm_delete.html'
     def get_success_url(self):
         return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
     
