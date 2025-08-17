@@ -19,7 +19,7 @@ class PostListView(ListView):
     template_name = 'post/post_list.html'
     context_object_name = "posts"
 
-    paginate_by = 1
+    paginate_by = 2
 
     def get_queryset(self):
         queryset = Post.objects.all().annotate(comments_count=Count('comments'))
@@ -137,7 +137,7 @@ class PostUpdateView(UpdateView):
 
 class PostDeleteView(DeleteView):
     model = Post
-    template_name = 'templates/post/post_confirm_delete.html'
+    template_name = 'post/post_confirm_delete.html'
     def get_success_url(self):
         return reverse_lazy('post:post_detail', kwargs={'slug': self.object.post.slug})
     

@@ -8,7 +8,6 @@
     {% csrf_token %}
     <p>¿Estás seguro de que deseas eliminar "{{ object.nombre }}"?</p>
     <button type="submit">Confirmar</button>
-    <!--a href="{% url 'post:post_list' slug=object.slug %}">Cancelar</a-->
     <a href="{% url 'post:post_detail' slug=object.slug %}">Cancelar</a>
 </form>
 {% endblock %}
