@@ -17,7 +17,7 @@
     {% for post in posts %}
     <div class="bg-gray-800 text-white rounded-2xl p-6">
         <h3 class="text-2xl uppercase font-bold">{{ post.title }}</h3>
-        <p>{{ post.content|truncatewords:30 }}</p>
+        <p>{{ post.content|truncatewords:30 }}</p><br>
         <p>Post publicado por: <strong class="font-bold">{{ post.author.username }}</strong></p>
         <p>Fecha de publicación: {{ post.creation_date }}</p>
         <p>Permitir comentarios?: {{ post.allow_comments|yesno:"Si,No" }}</p>
@@ -25,8 +25,10 @@
         <div class="flex gap-2 mt-8">
             <a class="bg-red-500 text-white p-2 rounded-lg" href="{% url 'post:post_detail' slug=post.slug %}">Ver el
                 post...</a>
+            {% if user.is_admin or user == post.author %}
             <a class="bg-red-500 text-white p-2 rounded-lg"
                 href="{% url 'post:post_confirm_delete' slug=post.slug %}">Eliminar el post</a>
+            {% endif %}
         </div>
     </div>
     {% empty %}
