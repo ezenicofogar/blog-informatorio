@@ -7,28 +7,24 @@ SECRET_KEY = env('SECRET_KEY')
 if SECRET_KEY is None:
     raise ValueError("SECRET_KEY must be correctly set in .env file")
 
-# TODO: configurar origenes
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['eze97.pythonanywhere.com']
 
 # Base de datos
 # https://docs.djangoproject.com/es/5.2/ref/settings/#databases
-
-# TODO: configurar base de datos
 DATABASES = {
-    ...
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':     env('DATABASE_NAME'),
+        'USER':     env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST':     env('DATABASE_HOST'),
+    },
 }
-
 
 # Archivos estáticos (CSS, JavaScript, Imágenes)
 # https://docs.djangoproject.com/es/5.2/howto/static-files/
-
-# TODO: configurar archivos estaticos
-STATIC_URL = ...
-# TODO: configurar directorio para collectstatic
-STATIC_ROOT = ...
-
-# TODO: configurar archivos de usuario
-MEDIA_URL = ...
-# TODO: configurar directorio para archivos de usuario
-MEDIA_ROOT = ...
+FS_ROOT = BASE_DIR.parent.parent / 'fileserver'
+STATIC_URL = '/static/'
+STATIC_ROOT = FS_ROOT / 'static'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = FS_ROOT / 'media'
