@@ -27,7 +27,7 @@
                 post...</a>
             {% if user.is_admin or user == post.author or user == superuser or user == collaborator %}
              <a class="bg-green-500 text-white p-2 rounded-lg"
-                href="{% url 'post:post_create' slug=post.slug %}">Crear post</a>
+                href="{% url 'post:post_create' %}">Crear post</a>
             <a class="bg-red-500 text-white p-2 rounded-lg"
                 href="{% url 'post:post_confirm_delete' slug=post.slug %}">Eliminar el post</a>
             {% endif %}
