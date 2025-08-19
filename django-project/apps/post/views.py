@@ -103,7 +103,7 @@ class PostDetailView(DetailView):
         return context
 
 class PostCreateView(auth_mixins.PermissionRequiredMixin, CreateView):
-    permission_required = []
+    permission_required = ['post.add_post']
     model = Post
     form_class = PostCreateForm
     template_name = 'post/post_create.html'
