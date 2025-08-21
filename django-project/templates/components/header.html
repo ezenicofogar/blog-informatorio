@@ -1,6 +1,39 @@
-{% if user.is_authenticated %}
-<form action="{% url 'user:logout' %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Cerrar Sesión">
-</form>
-{% endif %}
+<header id="main-header" class="flex gap-4 items-center mb-4 pt-4 pb-2 px-4 md:px-8 justify-normal md:justify-between max-md:flex-col bg-base-100 dark:bg-base-700 shadow-md dark:shadow-none dark:border-b border-primary-500/20">
+    <h1 class="flex items-center text-3xl font-bold font-crimson hover:opacity-60 transition-opacity">
+        <a href="{% url 'home:index' %}">
+            DDash
+        </a>
+    </h1>
+    <nav class="text-xl">
+        <ul class="flex gap-4 flex-wrap justify-center items-center">
+            <li class="px-2">
+                <a class="hover:opacity-60 transition-opacity" href="{% url 'article:forum_list' %}">
+                    Foros
+                </a>
+            </li>
+            <li class="px-2">
+                <a class="hover:opacity-60 transition-opacity" href="{% url 'home:about' %}">
+                    Nosotros
+                </a>
+            </li>
+            <li class="px-2">
+                <a class="hover:opacity-60 transition-opacity" href="{% url 'home:contact' %}">
+                    Contacto
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="px-2">
+                <a class="hover:opacity-60 transition-opacity" href="{% url 'user:self_detail' %}">
+                    Mi Perfil
+                </a>
+            </li>
+            {% else %}
+            <li class="px-2">
+                <a class="hover:opacity-60 transition-opacity" href="{% url 'user:login' %}">
+                    Iniciar sesión
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

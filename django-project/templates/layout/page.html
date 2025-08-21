@@ -12,8 +12,10 @@
 {% block body %}
     {% include 'components/header.html' %}
     
-    {% block content %}
-    {% endblock %}
+    <div class="min-h-screen">
+        {% block content %}
+        {% endblock %}
+    </div>
     
     {% include 'components/footer.html' %}
 {% endblock %}

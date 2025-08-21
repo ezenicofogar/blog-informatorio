@@ -1,0 +1,41 @@
+<footer class="text-lg mt-12 py-8 px-4 md:px-12 grid md:grid-cols-2 bg-base-100 dark:bg-base-700 shadow-md dark:shadow-none dark:border-t border-primary-500/20">
+    <ul class="my-4 flex flex-col">
+        <li>
+            <a class="opacity-70 underline cursor-pointer" href="{% url 'home:index' %}">
+                Inicio
+            </a>
+        </li>
+        <li>
+            <a class="opacity-70 underline cursor-pointer" href="{% url 'article:forum_list' %}">
+                Foros
+            </a>
+        </li>
+        <li>
+            <a class="opacity-70 underline cursor-pointer" href="{% url 'home:about' %}">
+                Nosotros
+            </a>
+        </li>
+        <li>
+            <a class="opacity-70 underline cursor-pointer" href="{% url 'home:contact' %}">
+                Contacto
+            </a>
+        </li>
+    </ul>
+    <ul class="my-4 flex flex-col">
+        <li>
+            <p class="opacity-70 mb-4">
+                &copy; 2025 Doble Dash
+            </p>
+        </li>
+        <li>
+            <a class="opacity-70 cursor-pointer" href="mailto:contacto@dobledash.com">
+                contacto@dobledash.com
+            </a>
+        </li>
+        <li>
+            <a class="opacity-70 cursor-pointer" href="mailto:institucional@dobledash.com">
+                institucional@dobledash.com
+            </a>
+        </li>
+    </ul>
+</footer>

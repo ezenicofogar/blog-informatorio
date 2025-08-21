@@ -1,0 +1,12 @@
+<a href="{% url 'article:forum_detail' forum=forum.slug %}" class="group">
+    <li class="p-4 h-full rounded-xl bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none outline-2 outline-transparent dark:outline-primary-700 md:group-hover:outline-primary-500 md:transition-colors">
+        <img src="{{ forum.cover.url }}" alt="{{ forum.cover.verbose_name }}"
+        class="w-full rounded aspect-[3/1] object-cover md:opacity-60 md:group-hover:opacity-100 md:transition-opacity">
+        <h2 class="pt-2 text-3xl md:text-4xl line-clamp-2">
+            {{ forum.title }}
+        </h2>
+        <p class="pt-2 text-lg line-clamp-2">
+            {{ forum.short }}
+        </p>
+    </li>
+</a>

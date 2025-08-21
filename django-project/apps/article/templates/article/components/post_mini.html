@@ -1,0 +1,14 @@
+<a href="{% url 'article:post_detail' forum=post.forum.slug post=post.slug %}" class="group">
+    <li class="p-4 h-full rounded-xl bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none outline-2 outline-transparent dark:outline-primary-700 md:group-hover:outline-primary-500 md:transition-colors">
+        <img src="{{ post.image.url }}" alt="{{ post.image.verbose_name }}"
+        class="w-full rounded aspect-[2/1] object-cover md:opacity-60 md:group-hover:opacity-100 md:transition-opacity">
+        <h2 class="pt-2 text-2xl md:text-3xl font-semibold line-clamp-2">
+            {{ post.title }}
+        </h2>
+        {% if post.preimagebody %}
+        <p class="pt-2 text-lg line-clamp-1">
+            {{ post.preimagebody }}
+        </p>
+        {% endif %}
+    </li>
+</a>

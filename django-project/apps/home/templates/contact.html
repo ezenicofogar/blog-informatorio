@@ -1,0 +1,33 @@
+{% extends 'layout/page.html' %}
+
+{% block content %}
+<section id="main-section" class="px-2 md:px-4 py-4 mx-auto max-w-[var(--breakpoint-2xl)]">
+    <div class="p-4 md:p-8 my-8 text-2xl md:text-3xl font-crimson rounded-xl bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none">
+        <h1 class="text-7xl md:text-9xl">
+            <a class="hover:opacity-60 transition-opacity cursor-pointer" href="{% url 'home:index' %}">
+                Doble Dash
+            </a>
+        </h1>
+        <p class="pt-4 text-4xl md:text-6xl font-semibold text-primary-500">
+            <svg class="inline w-[1em] h-[1em] mr-1 -translate-y-[0.1em]"  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.4"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" /></svg>
+            Información de contacto
+        </p>
+        <p class="pt-8">
+            <ul class="flex flex-col gap-4 italic font-semibold">
+                <li>
+                    <a class="hover:opacity-60 transition-opacity cursor-pointer" href="mailto:contacto@dobledash.com">
+                        <svg class="inline w-[1em] h-[1em] mr-1 -translate-y-[0.1em]"  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        contacto@dobledash.com
+                    </a>
+                </li>
+                <li>
+                    <a class="hover:opacity-60 transition-opacity cursor-pointer" href="mailto:institucional@dobledash.com">
+                        <svg class="inline w-[1em] h-[1em] mr-1 -translate-y-[0.1em]"  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 19h-10a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v5.5" /><path d="M3 7l9 6l9 -6" /><path d="M19 16v3" /><path d="M19 22v.01" /></svg>
+                        institucional@dobledash.com
+                    </a>
+                </li>
+            </ul>
+        </p>
+    </div>
+</section>
+{% endblock %}

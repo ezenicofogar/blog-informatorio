@@ -1,5 +1,12 @@
 # blog-informatorio
 
+## Notas sobre el proyecto
+
+### Tareas pendientes
+
+- Las imágenes requieren restricción de tamaño y (quizás) miniaturas.
+- Los foros y publicaciones necesitan formularios fuera del _admin_ de django.
+
 ## Cómo iniciar el proyecto
 
 > Nota: todos los comandos mostrados en esta sección están escritos para ejecutarse sin cambiar de carpeta.

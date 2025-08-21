@@ -3,7 +3,18 @@
 @source "django-project/**";
 @source "tailwind.input.css";
 
+@view-transition {
+    navigation: auto;
+}
+
 @theme {
+    --default-font-family: "Nunito Sans", sans-serif;
+    --default-font-variation-settings: "wdth" 100, "YTLC" 500;
+
+    --default-transition-duration: 400ms;
+  
+    --font-crimson: "Crimson Text", serif;
+
     --color-base-50: var(--color-neutral-50);
     --color-base-100: var(--color-neutral-100);
     --color-base-200: var(--color-neutral-200);
@@ -18,6 +29,12 @@
 
     --color-primary-500: var(--color-sky-500);
     --color-primary-700: var(--color-sky-700);
+}
+
+@layer base {
+    html {
+        font-optical-sizing: auto;
+    }
 }
 
 @layer components {
@@ -76,6 +93,10 @@
 
     .text-link {
         @apply underline cursor-pointer;
+    }
+
+    .no-summary-marker summary::marker {
+        content: "";
     }
 
 }

@@ -1,0 +1,41 @@
+{% extends 'layout/page.html' %}
+
+{% block content %}
+<section id="main-section" class="px-2 md:px-4 py-4 mx-auto max-w-[var(--breakpoint-2xl)]">
+    <div class="p-4 md:p-8 my-8 rounded-xl bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none">
+        <h1 class="text-7xl md:text-9xl font-crimson">
+            Doble Dash
+        </h1>
+        <p class="pt-4 text-4xl md:text-6xl font-crimson font-semibold text-primary-500">
+            La mirada de los que juegan.
+        </p>
+    </div>
+    {% if highlighted.count > 0 %}
+    <ul class="grid gap-4 md:grid-cols-2">
+        {% for h in highlighted %}
+        {% include 'article/components/post_mini.html' with post=h.post %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h2 class="mt-16 text-4xl md:text-6xl font-semibold">
+        Foros principales
+    </h2>
+    <ul class="mt-8 grid gap-4 md:grid-cols-2">
+        {% for f in forums %}
+        {% include 'article/components/forum_mini.html' with forum=f %}
+        {% empty %}
+        <a href="{% url 'article:forum_list' %}" class="group col-span-full">
+            <li class="p-4 h-fit rounded-xl bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none outline-2 outline-transparent dark:outline-primary-700 md:group-hover:outline-primary-500 md:transition-colors">
+                <h2 class="flex gap-3 items-center justify-center text-2xl md:text-3xl">
+                    <svg class="h-[1em] w-[1em]"  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /><path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /><path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" /><path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" /></svg>
+                    Explorar los foros
+                </h2>
+                <p class="text-center text-lg">
+                    Echa un vistazo a nuestros foros y descubre publicaciones increibles!
+                </p>
+            </li>
+        </a>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

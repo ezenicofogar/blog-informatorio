@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'apps.user',
+    'apps.article',
+    'apps.home',
 ]
 
 MIDDLEWARE = [
@@ -91,12 +93,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # TODO: Cambiar por la página principal de la aplicación de posts
-LOGIN_REDIRECT_URL = 'user:self_detail'
+LOGIN_REDIRECT_URL = 'home:index'
 
 LOGIN_URL = 'user:login'
 
 # TODO: Cambiar por landing page
-LOGOUT_REDIRECT_URL = 'user:login'
+LOGOUT_REDIRECT_URL = 'home:index'
 
 
 # Internacionalización

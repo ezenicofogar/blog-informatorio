@@ -71,6 +71,14 @@
         {% for link in links %}
         <li><a class="hover:opacity-70 text-link transition-opacity" href="{% url link.url %}">{{ link.text }}</a></li>
         {% endfor %}
+        {% if request.user.pk == object.pk %}
+        <li>
+            <form action="{% url 'user:logout' %}" method="post">
+                {% csrf_token %}
+                <input class="flex px-4 py-1.5 mt-4 items-center gap-2 w-fit text-xl rounded text-base-50 bg-primary-700 hover:bg-primary-500 transition-colors cursor-pointer" type="submit" value="Cerrar sesión">
+            </form>
+        </li>
+        {% endif %}
     </ul>
 </div>
 

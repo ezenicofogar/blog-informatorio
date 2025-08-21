@@ -1,0 +1,97 @@
+{% extends 'layout/page.html' %}
+
+{% block content %}
+<section id="main-section" class="px-2 md:px-4 py-4 mx-auto max-w-[var(--breakpoint-2xl)]">
+    <a href="{% url 'article:forum_detail' forum=object.forum.slug %}" class="flex px-3 py-1 mb-4 items-center gap-2 w-fit text-lg rounded text-base-50 bg-primary-700 hover:bg-primary-500 transition-colors">
+        <svg class="h-[1em] w-[1em]"  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></svg>
+        {{ object.forum.title }}
+    </a>
+    <article class="font-crimson flex flex-col gap-4 p-4 rounded-xl bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none dark:outline-2 dark:outline-primary-700">
+        <h1 class="text-5xl md:text-7xl font-semibold italic">{{ object.title }}</h1>
+        <p class="text-xl opacity-60 italic">
+            {{ object.created_at|date }}
+            {% if object.author %}
+            | por
+            <a href="{% url 'user:user_detail' pk=object.author.pk %}" class="font-semibold underline">
+                {{ object.author.username }}
+            </a>
+            {% endif %}
+        </p>
+
+        {% if object.preimagebody %}
+        <p class="text-xl md:text-2xl max-w-[var(--breakpoint-lg)] mx-auto">
+            {{ object.preimagebody }}
+        </p>
+        {% endif %}
+        <img src="{{ object.image.url }}" alt="{{ object.image.verbose_name }}"
+        class="max-w-[var(--breakpoint-lg)] mx-auto mb-4 w-full max-h-[40rem] object-contain shadow-lg shadow-base-800/20 dark:shadow-none">
+        {% if object.body %}
+        <p class="text-xl md:text-2xl max-w-[var(--breakpoint-lg)] mx-auto">
+            {{ object.body }}
+        </p>
+        {% endif %}
+    </article>
+    <div class="pt-4">
+        <ul class="flex flex-col gap-4 p-4 max-w-[var(--breakpoint-xl)] mx-auto">
+            {% for comm in object.comment_set.all %}
+            <li class="p-4 md:px-8 rounded bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none outline-2 outline-transparent dark:outline-primary-700/50">
+                {% if perms.article.delete_comment or perms.article.change_comment or request.user == comm.author %}
+                <details class="group peer no-summary-marker">
+                    <summary class="group-open:text-primary-500 flex items-center cursor-pointer mb-2">
+                        <svg class="h-[1em] w-[1em]"  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+                        <span class="group-open:hidden">
+                            Editar
+                        </span>
+                        <span class="hidden group-open:inline font-semibold">
+                            Editando
+                        </span>
+                    </summary>
+                    <form id="comment-{{ comm.pk }}-update-form" action="{% url 'article:comment_update' pk=comm.pk %}" method="post">
+                        {% csrf_token %}
+                        <div class="w-full py-2">
+                            <textarea class="px-3 py-1 my-1 flex w-full border border-base-800/20 dark:border-base-50/50 focus:outline-2 outline-primary-500 focus:border-transparent shadow-md dark:shadow-none rounded" name="body" id="comment-body">{{ comm.body }}</textarea>
+                        </div>
+                    </form>
+                    <div class="flex max-md:flex-col items-center justify-between mb-2">
+                        {% if perms.article.change_comment or request.user == comm.author %}
+                        <input class="mt-2 bg-primary-700 hover:bg-primary-500 text-base-50 transition-colors rounded px-3 py-1.5 font-medium" type="submit" value="Guardar cambios" form="comment-{{ comm.pk }}-update-form">
+                        {% endif %}
+                        {% if perms.article.delete_comment %}
+                        <form id="comment-{{ comm.pk }}-delete-form" action="{% url 'article:comment_delete' pk=comm.pk %}" method="post" class="hidden">{% csrf_token %}</form>
+                        <input class="mt-2 bg-orange-700 hover:bg-orange-500 text-base-50 transition-colors rounded px-3 py-1.5 font-medium" type="submit" value="Eliminar comentario" form="comment-{{ comm.pk }}-delete-form">
+                        {% endif %}
+                    </div>
+                </details>
+                {% endif %}
+                <p class="peer-open:hidden opacity-60 text-lg font-crimson italic">
+                    <a class="font-semibold underline" href="{% url 'user:user_detail' pk=comm.author.pk %}">{{ comm.author.username }}</a> dice:
+                </p>
+                <p class="peer-open:hidden text-xl">
+                    {{ comm.body }}
+                </p>
+            </li>
+            {% empty %}
+            <li class="p-4 md:px-8 rounded bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none outline-2 outline-transparent dark:outline-primary-700/50">
+                Aún no hay comentarios.
+            </li>
+            {% endfor %}
+            {% if user.is_authenticated %}
+            <li class="p-4 md:px-8 rounded bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none outline-2 outline-transparent dark:outline-primary-700/50">
+                <p class="text-xl">Deja tu opinion!</p>
+                <form action="{% url 'article:comment_create' forum=object.forum.slug post=object.slug %}" method="post">
+                    {% csrf_token %}
+                    <div class="w-full py-2">
+                        <textarea class="px-3 py-1 my-1 flex w-full border border-base-800/20 dark:border-base-50/50 focus:outline-2 outline-primary-500 focus:border-transparent shadow-md dark:shadow-none rounded" name="body" id="comment-body"></textarea>
+                    </div>
+                    <input class="bg-primary-700 hover:bg-primary-500 text-base-50 transition-colors rounded px-4 py-2 font-medium" type="submit" value="Comentar">
+                </form>
+            </li>
+            {% else %}
+            <li class="p-4 md:px-8 rounded bg-base-100 dark:bg-transparent shadow-lg shadow-base-800/20 dark:shadow-none outline-2 outline-transparent dark:outline-primary-700/50">
+                <p>Debes <a class="hover:opacity-60 transition-opacity text-link" href="{% url 'user:login' %}">Iniciar Sesión</a> para comentar.</p>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</section>
+{% endblock %}
