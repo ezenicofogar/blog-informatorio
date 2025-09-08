@@ -1,0 +1,13 @@
+{% extends 'layout/page.html' %}
+
+{% block html_title %}Confirmación{% endblock %}
+
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <p>¿Estás seguro de que deseas eliminar "{{ object.nombre }}"?</p>
+    <button type="submit">Confirmar</button>
+    <a href="{% url 'post:post_detail' slug=object.slug %}">Cancelar</a>
+</form>
+{% endblock %}

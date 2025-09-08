@@ -1,0 +1,26 @@
+{% extends 'layout/page.html' %}
+{% load static %}
+
+    {% comment %}
+
+    Este template contiene la estructura básica de HTML.
+    Enlaza el archivo de estilos de TailwindCSS.
+
+    {% endcomment %}
+
+    {% block extra_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block body class="bg bg-green-300" %}
+        <h2>¿Estás seguro de que quieres eliminar este comentario?</h2>
+        <p>{{ object.text }}</p>
+
+        <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar eliminación">
+        </form>
+        <a href="{% url 'comment_list' %}">Cancelar</a>
+    {% endblock %}
+</body>
+</html>

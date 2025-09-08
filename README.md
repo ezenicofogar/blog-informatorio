@@ -1,5 +1,25 @@
 # blog-informatorio
 
+## URL
+
+### [PythonAnywhere](https://link_al_proyecto)
+
+## Integrantes del grupo
+- FOGAR, EZEQUIEL NICOLÁS
+- RUIZ DIAZ, DAMIÁN INOCENTE
+
+## Usuarios de prueba
+- Grupo1: (activo ó registrado)
+  - (usuario, contraseña) = (7@Damian7, Facil123)
+  - UserG1:password1??
+
+- Grupo2: (staff)
+  - UserG2:password2??
+
+- SuperUser:
+  - (usuario, contraseña) = (Admin, facil123)
+
+
 ## Cómo iniciar el proyecto
 
 > Nota: todos los comandos mostrados en esta sección están escritos para ejecutarse sin cambiar de carpeta.

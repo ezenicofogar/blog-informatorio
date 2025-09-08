@@ -1,3 +1,5 @@
+from django.shortcuts import render
+
 from django.views import generic, View
 from django.contrib.auth import mixins, get_user_model, views as auth_views
 from django.urls import reverse_lazy
